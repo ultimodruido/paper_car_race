@@ -17,4 +17,16 @@ def test_import_track():
 
 def test_get_field_type():
     t = Track("test_track.csv")
-    assert "G" == t.get_field_type((0,0))
+    assert "G" == t.get_field_type((0, 0))
+
+
+def test_get_field_type_error():
+    t = Track("test_track.csv")
+    with pytest.raises(IndexError):
+        t.get_field_type((20, 20))
+
+
+def test_get_field_list_by_type():
+    t = Track("test_track.csv")
+    expected_result = [(1, 0), (2, 0)]
+    assert t.get_field_list_by_type('S') == expected_result

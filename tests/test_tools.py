@@ -23,4 +23,8 @@ def test_find_neighbours():
                        (3, 3), (3, 5),
                        (4, 3), (4, 4), (4, 5)]
 
+    assert find_neighbours(testing_point, exclude_coord=True) == expected_result
+    expected_result = [(2, 3), (2, 4), (2, 5),
+                       (3, 3), (3, 4), (3, 5),
+                       (4, 3), (4, 4), (4, 5)]
     assert find_neighbours(testing_point) == expected_result

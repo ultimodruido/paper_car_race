@@ -38,3 +38,11 @@ class Track:
         if 0 > coord[1] >= self.columns:
             raise IndexError("Coordinates out of range")
         return self._track[coord[0]][coord[1]]
+
+    def get_field_list_by_type(self, field_type: FieldType) -> CoordList:
+        match_list = list()
+        for row in range(self.rows):
+            for col in range(self.columns):
+                if self.get_field_type((row, col)) == field_type:
+                    match_list.append((row, col))
+        return match_list

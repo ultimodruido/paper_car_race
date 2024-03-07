@@ -36,5 +36,6 @@ def find_neighbours(coord: Coord, exclude_coord: bool = False) -> CoordList:
         for y in range(coord[1] - 1, coord[1] + 2):
             neighbours.append((x, y))
 
-    neighbours.remove(coord)
+    if exclude_coord:
+        neighbours.remove(coord)
     return neighbours
