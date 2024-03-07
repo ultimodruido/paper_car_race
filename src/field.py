@@ -3,10 +3,7 @@ Module: field.py
 function and memory structure to load and manage the track field
 """
 import csv
-
-type TrackType = list[list[str]]
-
-field_type = ("S", "F", "G", "T")
+from game_types import TrackType, FieldEnum, Coord, FieldType, CoordList
 
 
 def import_track(filename: str) -> TrackType:
@@ -22,7 +19,7 @@ def import_track(filename: str) -> TrackType:
         csv_content = csv.reader(csv_file, delimiter=',')
         for row in csv_content:
             for item in row:
-                if item not in field_type:
+                if item not in FieldEnum:
                     raise ValueError("Allowed fields are 'S', 'F', 'G', 'T'")
             track.append(row)
     return track
@@ -35,9 +32,9 @@ class Track:
         self.rows = len(self._track)
         self.columns = len(self._track[0])
 
-    def get_field_type(self, coord: tuple[int, int]) -> str:
-        if coord[0] >= self.rows:
+    def get_field_type(self, coord: Coord) -> FieldType:
+        if 0 > coord[0] >= self.rows:
             raise IndexError("Coordinates out of range")
-        if coord[1] >= self.columns:
+        if 0 > coord[1] >= self.columns:
             raise IndexError("Coordinates out of range")
         return self._track[coord[0]][coord[1]]

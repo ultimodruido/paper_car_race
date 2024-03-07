@@ -1,3 +1,5 @@
+import pytest
+
 from field import import_track, Track
 
 
@@ -9,7 +11,7 @@ def test_import_track():
         ["S", "T", "T", "T", "G"],
         ["G", "G", "T", "T", "G"],
         ["G", "G", "F", "F", "G"],
-        ]
+    ]
     assert expected_track == track
 
 

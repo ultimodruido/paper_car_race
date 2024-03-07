@@ -2,9 +2,10 @@
 Module: tools.py
 Collection of useful utilities
 """
+from game_types import Coord, CoordList
 
 
-def distance(coord_start: tuple[int, int], coord_end: tuple[int, int]) -> tuple[int, int]:
+def distance(coord_start: Coord, coord_end: Coord) -> Coord:
     """
     Calculate the distance in X,Y direction on a 2d map
     :param coord_start:
@@ -14,7 +15,7 @@ def distance(coord_start: tuple[int, int], coord_end: tuple[int, int]) -> tuple[
     return coord_end[0] - coord_start[0], coord_end[1] - coord_start[1]
 
 
-def next_cell(coord_start: tuple[int, int], distance: tuple[int, int]) -> tuple[int, int]:
+def next_cell(coord_start: Coord, distance: Coord) -> Coord:
     """
     Returns the coordinates of the new cell when moving from coord_start for the given distance
     :param coord_start:
@@ -24,7 +25,7 @@ def next_cell(coord_start: tuple[int, int], distance: tuple[int, int]) -> tuple[
     return coord_start[0] + distance[0], coord_start[1] + distance[1]
 
 
-def find_neighbours(coord: tuple[int, int]) -> list[tuple[int, int]]:
+def find_neighbours(coord: Coord, exclude_coord: bool = False) -> CoordList:
     """
     provide a list of all neighbour cells, the list does not include the starting cell
     :param coord:
