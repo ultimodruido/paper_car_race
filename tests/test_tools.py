@@ -1,4 +1,4 @@
-from tools import distance, next_cell, find_neighbours
+from tools import distance, next_cell, find_neighbours, check_inside_field
 
 
 def test_distance():
@@ -28,3 +28,9 @@ def test_find_neighbours():
                        (3, 3), (3, 4), (3, 5),
                        (4, 3), (4, 4), (4, 5)]
     assert find_neighbours(testing_point) == expected_result
+
+
+def test_check_inside_field():
+    assert check_inside_field((-1, 2), (20, 30)) is False
+    assert check_inside_field((10, 20), (20, 30)) is True
+    assert check_inside_field((10, 30), (20, 30)) is False

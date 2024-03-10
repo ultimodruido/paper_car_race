@@ -4,6 +4,7 @@ function and memory structure to load and manage the track field
 """
 import csv
 from game_types import TrackType, FieldEnum, Coord, FieldType, CoordList
+from tools import check_inside_field
 
 
 def import_track(filename: str) -> TrackType:
@@ -33,11 +34,10 @@ class Track:
         self.columns = len(self._track[0])
 
     def get_field_type(self, coord: Coord) -> FieldType:
-        if 0 > coord[0] >= self.rows:
+        if check_inside_field(coord, self.size):
+            return self._track[coord[0]][coord[1]]
+        else:
             raise IndexError("Coordinates out of range")
-        if 0 > coord[1] >= self.columns:
-            raise IndexError("Coordinates out of range")
-        return self._track[coord[0]][coord[1]]
 
     def get_field_list_by_type(self, field_type: FieldType) -> CoordList:
         match_list = list()
@@ -46,3 +46,7 @@ class Track:
                 if self.get_field_type((row, col)) == field_type:
                     match_list.append((row, col))
         return match_list
+
+    @property
+    def size(self) -> tuple[int, int]:
+        return self.rows, self.columns

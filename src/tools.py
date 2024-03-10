@@ -28,6 +28,7 @@ def next_cell(coord_start: Coord, distance: Coord) -> Coord:
 def find_neighbours(coord: Coord, exclude_coord: bool = False) -> CoordList:
     """
     provide a list of all neighbour cells, the list does not include the starting cell
+    :param exclude_coord:
     :param coord:
     :return:
     """
@@ -39,3 +40,11 @@ def find_neighbours(coord: Coord, exclude_coord: bool = False) -> CoordList:
     if exclude_coord:
         neighbours.remove(coord)
     return neighbours
+
+
+def check_inside_field(coord: Coord, track_size: tuple[int, int]) -> bool:
+    if (0 > coord[0]) or (coord[0] >= track_size[0]):
+        return False
+    if (0 > coord[1]) or (coord[1] >= track_size[1]):
+        return False
+    return True
