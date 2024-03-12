@@ -3,7 +3,7 @@ Module: field.py
 function and memory structure to load and manage the track field
 """
 import csv
-from game_types import TrackType, FieldEnum, Coord, FieldType, CoordList
+from game_types import TrackType, FieldTypes, Coord, FieldType, CoordList
 from tools import check_inside_field
 
 
@@ -20,7 +20,7 @@ def import_track(filename: str) -> TrackType:
         csv_content = csv.reader(csv_file, delimiter=',')
         for row in csv_content:
             for item in row:
-                if item not in FieldEnum:
+                if item not in FieldTypes():
                     raise ValueError("Allowed fields are 'S', 'F', 'G', 'T'")
             track.append(row)
     return track
@@ -29,7 +29,7 @@ def import_track(filename: str) -> TrackType:
 class Track:
     def __init__(self, filename):
         # import track
-        self._track = import_track(filename)
+        self._track: TrackType = import_track(filename)
         self.rows = len(self._track)
         self.columns = len(self._track[0])
 

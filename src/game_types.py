@@ -2,8 +2,6 @@
 Module: field.py
 function and memory structure to load and manage the track field
 """
-from enum import Enum
-
 type Row = int
 type Col = int
 type Coord = tuple[Row, Col]
@@ -12,11 +10,15 @@ type CoordList = list[tuple[Row, Col]]
 type FieldType = str
 
 
-class FieldEnum(Enum):
-    G: FieldType = "G"
-    T: FieldType = "T"
-    S: FieldType = "S"
-    F: FieldType = "F"
+class FieldTypes:
+    Grass: FieldType = "G"
+    Track: FieldType = "T"
+    Start: FieldType = "S"
+    Finish: FieldType = "F"
+    _elems = [Grass, Track, Start, Finish]
+
+    def __iter__(self):
+        return iter(self._elems)
 
 
 type TrackType = list[list[FieldType]]

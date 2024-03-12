@@ -1,6 +1,7 @@
 import pytest
 
 from field import import_track, Track
+from game_types import FieldTypes
 
 
 def test_import_track():
@@ -15,9 +16,14 @@ def test_import_track():
     assert expected_track == track
 
 
+def test_import_track_wrong():
+    with pytest.raises(ValueError):
+        track = import_track("test_track_wrong.csv")
+
+
 def test_get_field_type():
     t = Track("test_track.csv")
-    assert "G" == t.get_field_type((0, 0))
+    assert FieldTypes.Grass == t.get_field_type((0, 0))
 
 
 def test_get_field_type_error():
@@ -29,4 +35,4 @@ def test_get_field_type_error():
 def test_get_field_list_by_type():
     t = Track("test_track.csv")
     expected_result = [(1, 0), (2, 0)]
-    assert t.get_field_list_by_type('S') == expected_result
+    assert t.get_field_list_by_type(FieldTypes.Start) == expected_result
