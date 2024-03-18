@@ -1,6 +1,6 @@
 # Paper Car Race
 
-Electronic version of an old car race game I sued to play on paper as a kid :)
+Electronic version of an old car race game I used to play on paper as a kid :)
 
 ## Features planned for version 1.0
 
